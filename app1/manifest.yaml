@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app1
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels: 
       app: app1
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: lakshman143/deployment:2.0
+        image: lakshman143/app1:1.0.0
         ports:
         - containerPort: 80
 
@@ -26,7 +26,6 @@ apiVersion: v1
 metadata:   
   name: nginx
 spec: 
-  type: LoadBalancer
   selector:  #labels are used as selectors
     app: app1
   ports:
