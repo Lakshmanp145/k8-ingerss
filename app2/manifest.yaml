@@ -1,0 +1,63 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app2
+  labels:
+    app: app2
+spec:
+  replicas: 2
+  selector:
+    matchLabels: 
+      app: app2
+  template:
+    metadata:
+      labels: 
+        app: app2
+    spec:
+      containers:
+      - name: app2
+        image: lakshman143/app2:1.0.0
+        ports:
+        - containerPort: 80
+
+---
+kind: Service
+apiVersion: v1 
+metadata:   
+  name: app2
+spec: 
+  selector:  #labels are used as selectors
+    app: app2
+  ports:
+  - protocol: TCP
+    port: 80    #service port
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app2
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:503561459301:certificate/3b1fc553-c58f-4145-8395-6d7386479c19
+    alb.ingress.kubernetes.io/group.name: joindevops
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "app2.lakshman.site"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: app2
+            port:
+              number: 80
+
+
+
+
+
