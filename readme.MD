@@ -1,6 +1,6 @@
 ## ingress controler
 REGION_CODE=us-east-1
-CLUSTER_NAME=expense
+CLUSTER_NAME=expense-dev
 ACC_ID=503561459301
 
 ### IAM permissions
@@ -16,12 +16,14 @@ eksctl utils associate-iam-oidc-provider \
 curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.12.0/docs/install/iam_policy.json
 
 ```
+
 * Create IAM role
 ```
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam-policy.json
 ```
+
 * provide access to EKS through IAM policy
 ```
 eksctl create iamserviceaccount \

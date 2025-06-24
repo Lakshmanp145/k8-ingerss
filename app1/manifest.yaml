@@ -19,7 +19,6 @@ spec:
         image: lakshman143/app1:1.0.0
         ports:
         - containerPort: 80
-
 ---
 kind: Service
 apiVersion: v1 
@@ -41,7 +40,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:503561459301:certificate/3b1fc553-c58f-4145-8395-6d7386479c19
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:503561459301:certificate/7f5f4b2f-1240-4746-b149-46fed115a073
     alb.ingress.kubernetes.io/group.name: joindevops
 spec:
   ingressClassName: alb
